@@ -32,7 +32,7 @@ apple_pos = on_grid_random()
 apple = pygame.Surface((10,10))
 apple.fill((255,0,0))
 
-# direção inicial que cobrinha vai
+# direção inicial que a cobrinha vai
 my_direction = LEFT
 
 # um temporizador para reduzir a velocidade da cobrinha
@@ -98,12 +98,14 @@ while not game_over:
     screen.fill((0,0,0))
     screen.blit(apple,apple_pos)
 
+    #Cria o gridline
     for x in range(0, 600, 10):
         pygame.draw.line(screen,(40, 40, 40),(x,0),(x,600))
 
     for y in range(0, 600, 10):
         pygame.draw.line(screen,(40, 40, 40),(0, y),(600, y))
 
+    # Define a cor e posiciona o score
     score_font = font.render("Score: %s" % (score), True, (255, 255, 255))
     score_rect = score_font.get_rect()
     score_rect.topleft = (600 - 120, 10)
