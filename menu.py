@@ -1,5 +1,6 @@
 import pygame_menu
 from pygame_menu.examples import create_example_window
+from snake import game
 
 from typing import Tuple, Any
 
@@ -12,17 +13,19 @@ def start_the_game() -> None:
     :return: None
     """
     global user_name
-    print('{0}, Do the job here!'.format(user_name.get_value()))
+    # if __name__ == "__main__":
+    #     # stuff only to run when not called via 'import' here
+    game()
 
 
 menu = pygame_menu.Menu(
-    height = 600,
+    height=600,
     theme=pygame_menu.themes.THEME_DARK,
     title='Snake Game',
-    width = 600
+    width=600
 )
 
-user_name = menu.add.text_input('Name: ', default='John Doe', maxchar=10)
+# user_name = menu.add.text_input('Name: ', default='John Doe', maxchar=10)
 menu.add.button('Play', start_the_game)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 
