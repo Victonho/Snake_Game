@@ -2,7 +2,19 @@ import pygame, random
 from pygame.locals import * 
 from pygame import mixer
 from itertools import cycle
+import pygame_menu
+from pygame_menu.examples import create_example_window
 
+# def start_the_game() -> None:
+#     """
+#     Function that starts a game. This is raised by the menu button,
+#     here menu can be disabled, etc.
+#     :return: None
+#     """
+#     global user_name
+#     # if __name__ == "__main__":
+#     #     # stuff only to run when not called via 'import' here
+#     game()
 
 def game():
     # função que calcula posição aleatoria que a maçã aparecera
@@ -77,6 +89,9 @@ def game():
                     mixer.music.pause()
                 if event.key == K_r:
                     mixer.music.unpause()
+                if event.key == K_m:
+                    mixer.music.pause()
+                    menu.mainloop(surface)
 
         # verifica a colisão entre a cobrinha e a maçã
         if collision(snake[0],apple_pos):
@@ -131,7 +146,7 @@ def game():
 
         # Controles da música
         music_font = pygame.font.Font('freesansbold.ttf', 14)
-        music_text = "Music: p-pause r-resume"
+        music_text = "Music: p-pause r-resume          Menu: m-return to menu"
         music_font = music_font.render(music_text, True, (255, 255, 255))
         music_rect = music_font.get_rect()
         music_rect.topleft = (5 , 10)
@@ -176,3 +191,18 @@ def game():
                     if event.key == K_SPACE:
                         game()
                         
+surface = create_example_window('Example - Simple', (600, 600))
+
+menu = pygame_menu.Menu(
+    height=600,
+    theme=pygame_menu.themes.THEME_DARK,
+    title='Snake Game',
+    width=600
+)
+
+# user_name = menu.add.text_input('Name: ', default='John Doe', maxchar=10)
+menu.add.button('Play', game)
+menu.add.button('Quit', pygame_menu.events.EXIT)
+
+if __name__ == '__main__':
+    menu.mainloop(surface)
